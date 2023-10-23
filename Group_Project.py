@@ -27,10 +27,10 @@ def csv_to_sqlite(csv_file, db_name, table_name):
     conn.close()
 
 # Convert CSV to SQLite
-csv_to_sqlite("Bank_Customer_retirement.csv", "customer_data.db", "customer_table")
+csv_to_sqlite("Bank_Customer_retirement.csv", "customer_data.sqlite", "customer_table")
 
 # Load data from SQLite
-conn = sqlite3.connect('customer_data.db')
+conn = sqlite3.connect('customer_data.sqlite')
 cursor = conn.cursor()
 cursor.execute("SELECT * FROM customer_table")
 df = pd.DataFrame(cursor.fetchall(), columns=[i[0] for i in cursor.description])
@@ -50,7 +50,7 @@ st.subheader('Dataset')
 st.write(df)
 
 # Drop the 'Customer ID' column
-df.drop('Customer ID', axis=1, inplace=True)
+df.drop('Customer_ID', axis=1, inplace=True)
 
 # Round the numeric columns to 2 digits after the decimal point
 df = df.round(2)
@@ -158,7 +158,7 @@ elif choice == "SQL Query":
     st.subheader('SQL Integration')
 
     # Save DataFrame to SQLite database
-    conn = sqlite3.connect('customer_data.db')
+    conn = sqlite3.connect('customer_data.sqlite')
     df.to_sql('customer_table', conn, if_exists='replace', index=False)
 
     # Example query

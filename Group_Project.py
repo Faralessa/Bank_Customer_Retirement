@@ -67,7 +67,7 @@ if choice == "Data Analysis":
     # Explanation of the statistical summary
     st.subheader('Explanation of the Statistical Summary')
     st.write("""
-    The dataset analysis reveals essential insights for predicting a customer's retirement status. Firstly, the average age of the customers is approximately 46.76 years, with a range from 25 to 70 years. Understanding the relationship between age and retirement readiness is pivotal, as it provides valuable insights into how different age groups may approach retirement planning. Additionally, the significant variability in 401K savings, indicated by the standard deviation of $187,675.82, highlights the diverse financial preparedness among customers. This suggests that individuals with higher 401K savings may be better positioned for retirement, underlining the critical role of financial stability in retirement planning. 
+    The dataset analysis reveals essential insights for predicting a customer's retirement status. Firstly, the average age of the customers is approximately 46.76 years, with a range from 25 to 70 years. Understanding the relationship between age and retirement readiness is pivotal, as it provides valuable insights into how different age groups may approach retirement planning. Additionally, the significant variability in 401K savings, indicated by the standard deviation of $187,675.82, highlights the diverse financial preparedness among customers. This suggests that individuals with higher savings may be better positioned for retirement, underlining the critical role of financial stability in retirement planning. 
 
     Moreover, the balanced distribution of retired and non-retired individuals within the dataset, as indicated by an equal representation of 0s and 1s in the 'Retire' feature, underscores the necessity of considering both groups when developing the predictive model. Ensuring that the model captures insights from both retired and non-retired individuals accurately is imperative for creating a comprehensive framework for predicting retirement readiness. By leveraging these key insights, a robust predictive model can be developed, taking into account the crucial factors of age, financial stability, and the overall distribution of retired and non-retired individuals in the dataset.
     """)
@@ -82,7 +82,19 @@ if choice == "Data Analysis":
 
     # Explanation of Age Distribution
     st.write("The concentration of approximately 114 customers aged between 42.5 and 47.49, as depicted by the Plotly histogram, holds significance for our data science team. Understanding the distribution of customers within this key age bracket is crucial in developing an accurate predictive model for assessing retirement readiness. By focusing on this prominent customer segment, we can tailor our predictive model to provide targeted insights and personalized financial strategies, ensuring effective retirement planning for individuals within this core age group.")
+
+    import altair as alt
     
+    # Example of an interactive scatter plot
+    scatter_plot = alt.Chart(df).mark_circle().encode(
+        x='Age',
+        y='401K Savings',
+        color='Retire',
+        tooltip=['Age', '401K Savings', 'Retire']
+    ).interactive()
+    
+    st.write(scatter_plot)
+
 # Correlation Analysis tab
 elif choice == "Correlation Analysis":
     st.subheader('Correlation Analysis')

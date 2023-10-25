@@ -83,17 +83,41 @@ if choice == "Data Analysis":
     # Explanation of Age Distribution
     st.write("The concentration of approximately 114 customers aged between 42.5 and 47.49, as depicted by the Plotly histogram, holds significance for our data science team. Understanding the distribution of customers within this key age bracket is crucial in developing an accurate predictive model for assessing retirement readiness. By focusing on this prominent customer segment, we can tailor our predictive model to provide targeted insights and personalized financial strategies, ensuring effective retirement planning for individuals within this core age group.")
 
-    import altair as alt
+    # Age distribution among customers who retired or not
+    st.subheader('Age Distribution by Retirement Status')
+    retired = df[df['Retire'] == 1]['Age']
+    not_retired = df[df['Retire'] == 0]['Age']
+
+    fig, ax = plt.subplots()
+    sns.histplot(retired, color='skyblue', label='Retired', kde=False, bins=30)
+    sns.histplot(not_retired, color='salmon', label='Not Retired', kde=False, bins=30)
+    plt.legend()
+    st.pyplot(fig)
     
-    # Example of an interactive scatter plot
-    scatter_plot = alt.Chart(df).mark_circle().encode(
-        x='Age',
-        y='401K Savings',
-        color='Retire',
-        tooltip=['Age', '401K Savings', 'Retire']
-    ).interactive()
-    
-    st.write(scatter_plot)
+    # Explanation of plot
+    st.write("This distribution illustrates a notable concentration of retired individuals in the late 40s and above, indicating a prevalent trend of retirement within this age group. The data underscores the significance of effective financial planning and retirement strategies, especially for customers approaching their late 40s and beyond, to ensure a secure and stable post-retirement financial situation.')
+
+    # 401K Savings distribution among customers who retired or not
+    st.subheader('401K Savings Distribution by Retirement Status')
+    retired_savings = df[df['Retire'] == 1]['401K Savings']
+    not_retired_savings = df[df['Retire'] == 0]['401K Savings']
+
+    fig, ax = plt.subplots()
+    sns.histplot(retired_savings, color='skyblue', label='Retired', kde=False, bins=30)
+    sns.histplot(not_retired_savings, color='salmon', label='Not Retired', kde=False, bins=30)
+    plt.legend()
+    st.pyplot(fig)
+
+    # Seaborn
+    st.subheader('Seaborn Visualization')
+    fig, ax = plt.subplots()
+    sns.boxplot(x='Retire', y='401K Savings', data=df, ax=ax)
+    st.pyplot(fig)
+
+    # Plotly
+    st.subheader('Plotly Visualization')
+    fig = px.scatter(df, x='Age', y='401K Savings', color='Retire')
+    st.plotly_chart(fig)
 
 # Correlation Analysis tab
 elif choice == "Correlation Analysis":
@@ -123,39 +147,6 @@ elif choice == "Correlation Analysis":
 
     Moreover, the substantial positive association of 0.78 between '401K Savings' and 'Retire' highlights the crucial role of financial preparedness in retirement. The correlation suggests that higher 401K savings are strongly linked to a higher likelihood of being retired, underlining the significance of adequate financial planning and stable retirement savings in ensuring a comfortable retirement.
     """)
-
-    # Age distribution among customers who retired or not
-    st.subheader('Age Distribution by Retirement Status')
-    retired = df[df['Retire'] == 1]['Age']
-    not_retired = df[df['Retire'] == 0]['Age']
-
-    fig, ax = plt.subplots()
-    sns.histplot(retired, color='skyblue', label='Retired', kde=False, bins=30)
-    sns.histplot(not_retired, color='salmon', label='Not Retired', kde=False, bins=30)
-    plt.legend()
-    st.pyplot(fig)
-
-    # 401K Savings distribution among customers who retired or not
-    st.subheader('401K Savings Distribution by Retirement Status')
-    retired_savings = df[df['Retire'] == 1]['401K Savings']
-    not_retired_savings = df[df['Retire'] == 0]['401K Savings']
-
-    fig, ax = plt.subplots()
-    sns.histplot(retired_savings, color='skyblue', label='Retired', kde=False, bins=30)
-    sns.histplot(not_retired_savings, color='salmon', label='Not Retired', kde=False, bins=30)
-    plt.legend()
-    st.pyplot(fig)
-
-    # Seaborn
-    st.subheader('Seaborn Visualization')
-    fig, ax = plt.subplots()
-    sns.boxplot(x='Retire', y='401K Savings', data=df, ax=ax)
-    st.pyplot(fig)
-
-    # Plotly
-    st.subheader('Plotly Visualization')
-    fig = px.scatter(df, x='Age', y='401K Savings', color='Retire')
-    st.plotly_chart(fig)
 
 # SQL Query tab
 elif choice == "SQL Query":

@@ -114,6 +114,9 @@ if choice == "Data Analysis":
     sns.boxplot(x='Retire', y='401K Savings', data=df, ax=ax)
     st.pyplot(fig)
 
+    # Short description under the figure
+    st.write("The figures reveal that non-retired individuals tend to have savings below 0.6M, with the highest concentration between 0.3M and 0.4M. In contrast, retired individuals show a broader range of savings, starting from around $400,000 and extending up to 1M, possibly due to effective long-term financial planning, increased investment opportunities, employer retirement benefits, and personal financial discipline. These factors collectively contribute to the growth of their savings over time.")
+
     # Plotly
     st.subheader('Plotly Visualization')
     fig = px.scatter(df, x='Age', y='401K Savings', color='Retire')

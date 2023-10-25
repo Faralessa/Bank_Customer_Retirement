@@ -94,8 +94,8 @@ if choice == "Data Analysis":
     plt.legend()
     st.pyplot(fig)
     
-    # Explanation of plot
-    st.write("This distribution illustrates a notable concentration of retired individuals in the late 40s and above, indicating a prevalent trend of retirement within this age group. The data underscores the significance of effective financial planning and retirement strategies, especially for customers approaching their late 40s and beyond, to ensure a secure and stable post-retirement financial situation.')
+    # Short description under the figure
+    st.write("This distribution illustrates a notable concentration of retired individuals in the late 40s and above, indicating a prevalent trend of retirement within this age group. The data underscores the significance of effective financial planning and retirement strategies, especially for customers approaching their late 40s and beyond, to ensure a secure and stable post-retirement financial situation.")
 
     # 401K Savings distribution among customers who retired or not
     st.subheader('401K Savings Distribution by Retirement Status')

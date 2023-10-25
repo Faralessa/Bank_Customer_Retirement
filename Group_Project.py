@@ -186,11 +186,11 @@ elif choice == "GPT-4 Integration":
 
     try:
         # Load OpenAI key from file
-        with open('key.txt', 'r') as file:
-            openai_key = file.read().strip()
+        # with open('key.txt', 'r') as file:
+            # openai_key = file.read().strip()
 
         # Set OpenAI API key for GPT-4
-        openai.api_key = openai_key
+        openai.api_key = st.secrets["OPENAI_KEY"]
 
         # Introduction to GPT-4 integration
         st.write("Considering the crucial interplay of age, financial readiness, and retirement planning, we invite you to delve deeper into the dynamics of securing a stable financial future. With our ongoing analysis highlighting key trends in retirement preparation, we are eager to address any inquiries or uncertainties you may have about optimizing your financial plans for a comfortable retirement. Feel free to ask any questions or seek personalized insights to ensure a seamless transition into this significant phase of your life.")

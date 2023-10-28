@@ -19,7 +19,7 @@ st.title('Bank Customer Retirement Data Analysis')
 
 # Introduction
 intro = """
-As a collaborative data science team at a leading New York City bank, we aim to build a predictive model to determine a customer's retirement readiness. Our analysis involves exploring essential customer data, including age and 401K savings, to better understand the key factors influencing retirement preparedness. Through statistical analysis, correlation assessments, SQL querying, and GPT-4 integration, we seek to derive actionable insights that will inform the development of an accurate predictive model.
+As a collaborative data science team at a leading New York City bank, we aim to build a predictive model to determine a customer's retirement readiness. Our analysis involves exploring essential customer data, including age and amount of savings, to better understand the key factors influencing retirement preparedness. Through statistical analysis, correlation assessments, SQL querying, and GPT-4 integration, we seek to derive actionable insights that will inform the development of an accurate predictive model.
 """
 st.write(intro)
 
@@ -256,6 +256,9 @@ elif choice == "Model Results":
     # Classification Report
     st.subheader('Classification Report')
     st.text(classification_report(y_test, y_pred))
+
+    # Add business conclusion
+    st.write("The predictive model's performance, as evidenced by the high precision, recall, and F1-score values, reflects its accuracy in predicting retirement readiness based on customer data. The model's high accuracy rate of 96% further confirms its reliability and effectiveness in assessing customers' retirement status.")
     
     # Confusion Matrix Plot
     st.subheader('Confusion Matrix')
@@ -264,6 +267,10 @@ elif choice == "Model Results":
     plt.ylabel('Actual Label')
     plt.xlabel('Predicted Label')
     st.pyplot(fig)
+
+    # Business Conclusion
+    st.subheader('Business Conclusion')
+    st.write("In summary, our comprehensive data analysis has provided crucial insights into the dynamics of retirement preparedness, emphasizing the significant roles of age, financial stability, and effective planning. Building on these insights, our predictive model demonstrates high accuracy in assessing customers' retirement readiness, as evident from the model results and predictions. By leveraging these findings, we aim to offer tailored financial strategies and personalized guidance, ensuring a seamless and secure transition into the post-retirement phase for our valued customers.")
 
 # Predictions tab
 elif choice == "Predictions":

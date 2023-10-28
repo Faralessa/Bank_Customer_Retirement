@@ -1,5 +1,6 @@
 # pip install streamlit pandas matplotlib seaborn plotly sqlalchemy
 # pip install openai
+pip install --upgrade scikit-learn
 
 import streamlit as st
 import pandas as pd

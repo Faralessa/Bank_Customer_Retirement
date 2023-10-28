@@ -42,28 +42,9 @@ cursor = conn.cursor()
 cursor.execute("SELECT * FROM customer_table")
 df = pd.DataFrame(cursor.fetchall(), columns=[i[0] for i in cursor.description])
 conn.close()
-############################################################################################################
-# Additional imports
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix
-import numpy as np
-
-# Split the data
-X = df[['Age', '401K Savings']]
-y = df['Retire']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Train the model
-clf = RandomForestClassifier(random_state=42)
-clf.fit(X_train, y_train)
-
-# Predict on the test set
-y_pred = clf.predict(X_test)
-############################################################################################################
 
 # Add tabs
-tabs = ["Data Analysis", "Correlation Analysis", "SQL Query", "GPT-4 Integration","Model Results", "Predictions"]
+tabs = ["Data Analysis", "Correlation Analysis", "SQL Query", "GPT-4 Integration"]
 choice = st.sidebar.radio("Select a tab", tabs)
 
 # Data Analysis tab
@@ -246,37 +227,4 @@ elif choice == "GPT-4 Integration":
         st.write("Error: Key file not found. Please make sure the key file is in the correct directory.")
     except Exception as e:
         st.write(f"An error occurred: {e}")
-#############################################################################################################
-# Model Results tab
-elif choice == "Model Results":
-    st.subheader('Model Results')
-    
-    # Classification Report
-    st.subheader('Classification Report')
-    st.text(classification_report(y_test, y_pred))
-    
-    # Confusion Matrix Plot
-    st.subheader('Confusion Matrix')
-    fig, ax = plt.subplots(figsize=(5, 5))
-    sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", cmap="Blues", ax=ax)
-    plt.ylabel('Actual Label')
-    plt.xlabel('Predicted Label')
-    st.pyplot(fig)
 
-# Predictions tab
-elif choice == "Predictions":
-    st.subheader('Predictions')
-    st.write("Predictions are based on random forest model.")
-    # User input
-    age = st.text_input("Enter Age (e.g., 45.5):", value="")
-    savings = st.text_input("Enter 401K Savings (e.g., 500000.25):", value="")
-    
-    # Predict when both fields are filled
-    if st.button("Predict Retirement Status"):
-        # Making the prediction
-        prediction = clf.predict([[float(age), float(savings)]])[0]
-        if prediction == 1:
-            st.write("Based on the provided Age and 401K Savings, the model predicts that the customer is **Retired**.")
-        else:
-            st.write("Based on the provided Age and 401K Savings, the model predicts that the customer is **Not Retired**.")
-##############################
